@@ -8,8 +8,9 @@ Configures the Azure Activity Logs rention for a subscription into:
 Reference the module to a specific version (recommended):
 ```hcl
 module "activity_logs" {
-    source                  = "git://github.com/aztfmod/activity_logs.git?ref=v0.3"
-  
+    source  = "aztfmod/caf-activity-logs/azurerm"
+    version = "0.1"
+    
     resource_group_name   = var.rg
     location              = var.locations
     tags                  = var.tags
