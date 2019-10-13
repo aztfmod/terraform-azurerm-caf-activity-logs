@@ -29,6 +29,7 @@ resource "azurerm_eventhub_namespace" "log" {
   capacity            = 2
   tags                = local.tags
   auto_inflate_enabled = false
+  kafka_enabled       = true
 }
 resource "azurerm_monitor_log_profile" "subscription" {
   name = "default"
