@@ -19,19 +19,6 @@ module "activity_logs" {
 }
 ```
 
-Or get the latest version
-```hcl
-module "activity_logs" {
-    source                  = "git://github.com/aztfmod/activity_logs.git?ref=latest"
-  
-    resource_group_name   = var.rg
-    location              = var.locations
-    tags                  = var.tags
-    prefix                = var.prefix
-    logs_rentention       = var.retention
-}
-```
-
 # Parameters
 
 ## resource_group_name
@@ -96,7 +83,7 @@ resource "random_string" "prefix" {
 ```
 
 ## logs_rentention
-(Required) Number of days to keep the logs for long term retention (storage account)"
+(Required) Number of days to keep the logs for long term retention (storage account)
 ```hcl
 variable "logs_rentention" {
   description = "(Required) Number of days to keep the logs for long term retention"
@@ -105,7 +92,25 @@ variable "logs_rentention" {
 Example
 ```hcl
 logs_rentention = 60
+
+
 ```
+
+## enable_event_hub 
+(Optional) Determine to deploy Event Hub for the configuration
+```hcl
+variable "enable_event_hub" {
+  description = "(Optional) Determine to deploy Event Hub for the configuration"
+  default = true
+}
+```
+
+Example
+```hcl
+enable_event_hub = false
+
+```
+
 
 # Output
 ```hcl

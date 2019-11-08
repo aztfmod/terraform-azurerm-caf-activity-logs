@@ -17,3 +17,8 @@ variable "prefix" {
 variable "logs_rentention" {
   description = "(Required) Number of days to keep the logs for long term retention"
 }
+
+variable "enable_event_hub" {
+  description = "(Optional) Determine to deploy Event Hub for the configuration"
+  default = true
+}
