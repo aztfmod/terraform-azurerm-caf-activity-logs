@@ -24,7 +24,7 @@ resource "azurerm_storage_account" "log" {
 }
 
 resource "azurerm_eventhub_namespace" "log" {
-  count = "${var.enable_event_hub ? 1 : 0}" 
+  count = var.enable_event_hub ? 1 : 0 
   name                = local.name
   location            = var.location
   resource_group_name = var.resource_group_name
