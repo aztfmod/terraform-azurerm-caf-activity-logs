@@ -111,7 +111,6 @@ enable_event_hub = false
 
 ```
 
-
 # Output
 ```hcl
 "seclogs_map" {

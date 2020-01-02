@@ -2,7 +2,7 @@
 # Creating the containers on Storage Account and Event Hub (optional)
 
 module "caf_name_st" {
-  source = "../terraform-azurerm-caf-naming/"
+  source = "github.com/aztfmod/terraform-azurerm-caf-naming.git?ref=proto"
   
   name    = var.name
   type    = "st"
@@ -10,7 +10,7 @@ module "caf_name_st" {
 }
 
 module "caf_name_evh" {
-  source = "../terraform-azurerm-caf-naming/"
+  source = "github.com/aztfmod/terraform-azurerm-caf-naming.git?ref=proto"
   
   name    = var.name
   type    = "evh"
