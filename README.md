@@ -2,7 +2,7 @@
 # Configures the Azure Activity Logs for a subscription
 
 Configures the Azure Activity Logs rention for a subscription into:
-1. Event Hub for short term and fast access.
+1. Event Hub for short term and fast access (optional).
 2. Storage account for long term retention. 
 
 Reference the module to a specific version (recommended):
@@ -111,15 +111,21 @@ enable_event_hub = false
 
 ```
 
-# Output
+## Convention
+(Required) Map of tags for the deployment
 ```hcl
-"seclogs_map" {
-    value = "${
-        map(
-            "activity_sa", "${azurerm_storage_account.log.id}",
-            "activity_eh_name",  "${azurerm_eventhub_namespace.log.name}",
-            "activity_eh_id", "${azurerm_eventhub_namespace.log.id}"
-        )
-    }"
+variable "convention" {
+  description = "(Required) Naming convention used"
 }
 ```
+Example
+```hcl
+convention = "cafclassic"
+```
+
+# Outputs
+
+
+| Name | Type | Description | 
+| -- | -- | -- | 
+| seclogs_map | map | Returns a map that contains the activity log object: <br> - activity_sa (mandatory) <br> - activity_eh_name (optional, only if enable_event_hub is set to true) <br> - activity_eh_id (optional, only if enable_event_hub is set to true) |
