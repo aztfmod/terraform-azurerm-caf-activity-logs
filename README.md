@@ -9,7 +9,7 @@ Reference the module to a specific version (recommended):
 ```hcl
 module "activity_logs" {
     source  = "aztfmod/caf-activity-logs/azurerm"
-    version = "0.1"
+    version = "0.x.y"
     
     resource_group_name   = var.rg
     location              = var.locations
@@ -111,7 +111,7 @@ enable_event_hub = false
 
 ```
 
-## Convention
+## convention
 (Required) Map of tags for the deployment
 ```hcl
 variable "convention" {
@@ -124,7 +124,6 @@ convention = "cafclassic"
 ```
 
 # Outputs
-
 
 | Name | Type | Description | 
 | -- | -- | -- | 
