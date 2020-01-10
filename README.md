@@ -112,7 +112,7 @@ enable_event_hub = false
 ```
 
 ## convention
-(Required) Map of tags for the deployment
+(Required) Naming convention to be used.
 ```hcl
 variable "convention" {
   description = "(Required) Naming convention used"
