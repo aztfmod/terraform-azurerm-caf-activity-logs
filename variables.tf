@@ -22,3 +22,12 @@ variable "enable_event_hub" {
   description = "(Optional) Determine to deploy Event Hub for the configuration"
   default = true
 }
+
+variable "convention" {
+  description = "(Required) Naming convention method to use"  
+}
+
+variable "name" {
+  description = "(Required) Name for the objects created (before naming convention applied.)"    
+}
+

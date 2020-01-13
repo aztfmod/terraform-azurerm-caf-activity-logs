@@ -6,7 +6,7 @@ output "seclogs_map" {
     value = "${
         map(
             "activity_sa", azurerm_storage_account.log.id,
-            "activity_eh_name",  var.enable_event_hub == true ? azurerm_eventhub_namespace.log[0].name : null,
+            "activity_eh_name", var.enable_event_hub == true ? azurerm_eventhub_namespace.log[0].name : null,
             "activity_eh_id", var.enable_event_hub == true ? azurerm_eventhub_namespace.log[0].id : null, 
         )
     }"
