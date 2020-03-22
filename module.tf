@@ -1,26 +1,21 @@
 # Defines the subscription-wide logging and eventing settings
 # Creating the containers on Storage Account and Event Hub (optional)
-
-module "caf_name_st" {
-  source  = "aztfmod/caf-naming/azurerm"
-  version = "~> 0.1.0"
-  
+resource "azurecaf_naming_convention" "caf_name_st" {  
   name    = var.name
-  type    = "st"
+  prefix  = var.prefix != "" ? var.prefix : null
+  resource_type    = "st"
   convention  = var.convention
 }
 
-module "caf_name_evh" {
-  source  = "aztfmod/caf-naming/azurerm"
-  version = "~> 0.1.0"
-
+resource "azurecaf_naming_convention" "caf_name_evh" {  
   name    = var.name
-  type    = "evh"
+  prefix  = var.prefix != "" ? var.prefix : null
+  resource_type    = "evh"
   convention  = var.convention
 }
 
 resource "azurerm_storage_account" "log" {
-  name                      = module.caf_name_st.st
+  name                      = azurecaf_naming_convention.caf_name_st.result
   resource_group_name       = var.resource_group_name
   location                  = var.location
   account_kind              = "StorageV2"
@@ -34,7 +29,7 @@ resource "azurerm_storage_account" "log" {
 resource "azurerm_eventhub_namespace" "log" {
   count = var.enable_event_hub ? 1 : 0 
   
-  name                    = module.caf_name_evh.evh
+  name                    = azurecaf_naming_convention.caf_name_evh.result
   location                = var.location
   resource_group_name     = var.resource_group_name
   sku                     = "Standard"
