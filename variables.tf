@@ -10,9 +10,6 @@ variable "tags" {
   description = "(Required) Tags for the logs repositories to be created "
   
 }
-variable "prefix" {
-  description = "(Optional) You can use a prefix to add to the list of resource groups you want to create"
-}
 
 variable "logs_rentention" {
   description = "(Required) Number of days to keep the logs for long term retention"
@@ -29,5 +26,23 @@ variable "convention" {
 
 variable "name" {
   description = "(Required) Name for the objects created (before naming convention applied.)"    
+}
+
+variable "prefix" {
+  description = "(Optional) You can use a prefix to the name of the resource"
+  type        = string
+  default = ""
+}
+
+variable "postfix" {
+  description = "(Optional) You can use a postfix to the name of the resource"
+  type        = string
+  default = ""
+}
+
+variable "max_length" {
+  description = "(Optional) You can speficy a maximum length to the name of the resource"
+  type        = string
+  default = ""
 }
 
