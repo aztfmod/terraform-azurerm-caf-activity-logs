@@ -23,6 +23,7 @@ module "activity_logs" {
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
 | resource_group_name | string | None | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. |
+| name | string | None | (Required) Name for the objects created (before naming convention applied.) |
 | location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
 | tags | map | None | (Required) Map of tags for the deployment.  |
 | logs_retention | string | None | (Required) Number of days to keep the logs for long term retention (storage account)  |
