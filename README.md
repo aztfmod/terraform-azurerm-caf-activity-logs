@@ -1,4 +1,5 @@
-[![Build status](https://dev.azure.com/azure-terraform/Blueprints/_apis/build/status/modules/activity_logs)](https://dev.azure.com/azure-terraform/Blueprints/_build/latest?definitionId=7)
+[![Gitter](https://badges.gitter.im/aztfmod/community.svg)](https://gitter.im/aztfmod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # Configures the Azure Activity Logs for a subscription
 
 Configures the Azure Activity Logs rention for a subscription into:
@@ -15,115 +16,26 @@ module "activity_logs" {
     location              = var.locations
     tags                  = var.tags
     prefix                = var.prefix
-    logs_rentention       = var.retention
+    logs_retention       = var.retention
 }
 ```
+## Inputs 
 
-# Parameters
-
-## resource_group_name
-(Required) (Required) Name of the resource group to deploy the activity logs.
-```hcl
-variable "resource_group_name" {
-  description = "(Required) Name of the resource group to deploy the activity logs."
-}
-
-```
-Example
-```hcl
-    resource_group_name   = "myrg" 
-```
-
-## location
-(Required) Define the region where the resources will be created
-```hcl
-variable "location" {
-  description = "(Required) Define the region where the resources will be created"
-}
-```
-Example
-```hcl
-    location   = "southeastasia"
-```
-
-## tags
-(Required) Map of tags for the deployment
-```hcl
-variable "tags" {
-  description = "(Required) map of tags for the deployment"
-}
-```
-Example
-```hcl
-tags = {
-    environment     = "DEV"
-    owner           = "Arnaud"
-    deploymentType  = "Terraform"
-  }
-```
-
-## prefix
-(Optional) You can use a prefix to add to the list of resource groups you want to create
-```hcl
-variable "prefix" {
-    description = "(Optional) You can use a prefix to add to the list of resource groups you want to create"
-}
-```
-Example
-```hcl
-locals {
-    prefix = "${random_string.prefix.result}-"
-}
-
-resource "random_string" "prefix" {
-    length  = 4
-    upper   = false
-    special = false
-}
-```
-
-## logs_rentention
-(Required) Number of days to keep the logs for long term retention (storage account)
-```hcl
-variable "logs_rentention" {
-  description = "(Required) Number of days to keep the logs for long term retention"
-}
-```
-Example
-```hcl
-logs_rentention = 60
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| resource_group_name | string | None | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. |
+| name | string | None | (Required) Name for the objects created (before naming convention applied.) |
+| location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
+| tags | map | None | (Required) Map of tags for the deployment.  |
+| logs_retention | string | None | (Required) Number of days to keep the logs for long term retention (storage account)  |
+| enable_event_hub | boolean | true | (Optional) Determine to deploy Event Hub for the configuration. |
+| convention | string | None | (Required) Naming convention to be used (check at the naming convention module for possible values).  |
+| prefix | string | None | (Optional) Prefix to be used. |
+| postfix | string | None | (Optional) Postfix to be used. |
+| max_length | string | None | (Optional) maximum length to the name of the resource. |
 
 
-```
-
-## enable_event_hub 
-(Optional) Determine to deploy Event Hub for the configuration
-```hcl
-variable "enable_event_hub" {
-  description = "(Optional) Determine to deploy Event Hub for the configuration"
-  default = true
-}
-```
-
-Example
-```hcl
-enable_event_hub = false
-
-```
-
-## convention
-(Required) Naming convention to be used.
-```hcl
-variable "convention" {
-  description = "(Required) Naming convention used"
-}
-```
-Example
-```hcl
-convention = "cafclassic"
-```
-
-# Outputs
+## Outputs
 
 | Name | Type | Description | 
 | -- | -- | -- | 
