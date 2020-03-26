@@ -1,4 +1,5 @@
 [![Gitter](https://badges.gitter.im/aztfmod/community.svg)](https://gitter.im/aztfmod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 # Configures the Azure Activity Logs for a subscription
 
 Configures the Azure Activity Logs rention for a subscription into:
@@ -34,7 +35,7 @@ module "activity_logs" {
 | max_length | string | None | (Optional) maximum length to the name of the resource. |
 
 
-# Outputs
+## Outputs
 
 | Name | Type | Description | 
 | -- | -- | -- | 
