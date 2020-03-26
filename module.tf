@@ -3,13 +3,17 @@
 resource "azurecaf_naming_convention" "caf_name_st" {  
   name    = var.name
   prefix  = var.prefix != "" ? var.prefix : null
-  resource_type    = "st"
+  postfix       = var.postfix != "" ? var.postfix : null
+  max_length    = var.max_length != "" ? var.max_length : null
+  resource_type    = "azurerm_storage_account"
   convention  = var.convention
 }
 
 resource "azurecaf_naming_convention" "caf_name_evh" {  
   name    = var.name
   prefix  = var.prefix != "" ? var.prefix : null
+  postfix       = var.postfix != "" ? var.postfix : null
+  max_length    = var.max_length != "" ? var.max_length : null
   resource_type    = "evh"
   convention  = var.convention
 }
@@ -51,7 +55,7 @@ resource "azurerm_monitor_log_profile" "subscription" {
 
 # Add all regions - > put in variable
 # az account list-locations --query '[].name' 
-# updated Dec 15 2019 
+# updated Dec 15 2019 checked March 2020
   locations = [
   "global",
   "eastasia",
