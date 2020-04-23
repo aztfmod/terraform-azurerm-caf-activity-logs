@@ -55,116 +55,66 @@ resource "azurerm_monitor_diagnostic_setting" "audit" {
 
   log {
       category = "Administrative"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "Security"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "ServiceHealth"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "Alert"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "Recommendation"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "Policy"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "Autoscale"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
   }
   log {
       category = "ResourceHealth"
+      enabled  = true
       retention_policy {
+        days = 0
         enabled = false
       }
-  }
-}
-
-resource "azurerm_monitor_log_profile" "subscription" {
-  name = "default"
-
-  categories = [
-    "Action",
-    "Delete",
-    "Write"
-  ]
-
-# Add all regions - > put in variable
-# az account list-locations --query '[].name' 
-# updated Dec 15 2019 checked March 2020
-  locations = [
-  "global",
-  "eastasia",
-  "southeastasia",
-  "centralus",
-  "eastus",
-  "eastus2",
-  "westus",
-  "northcentralus",
-  "southcentralus",
-  "northeurope",
-  "westeurope",
-  "japanwest",
-  "japaneast",
-  "brazilsouth",
-  "australiaeast",
-  "australiasoutheast",
-  "southindia",
-  "centralindia",
-  "westindia",
-  "canadacentral",
-  "canadaeast",
-  "uksouth",
-  "ukwest",
-  "westcentralus",
-  "westus2",
-  "koreacentral",
-  "koreasouth",
-  "francecentral",
-  "francesouth",
-  "australiacentral",
-  "australiacentral2",
-  "uaecentral",
-  "uaenorth",
-  "southafricanorth",
-  "southafricawest",
-  "switzerlandnorth",
-  "switzerlandwest",
-  "germanynorth",
-  "germanywestcentral",
-  "norwaywest",
-  "norwayeast"
-  ]
-
-# RootManageSharedAccessKey is created by default with listen, send, manage permissions
-servicebus_rule_id = var.enable_event_hub == true ? "${azurerm_eventhub_namespace.log[0].id}/authorizationrules/RootManageSharedAccessKey" : null
-storage_account_id = azurerm_storage_account.log.id
-
-  retention_policy {
-    enabled = true
-    days    = var.logs_rentention
   }
 }
