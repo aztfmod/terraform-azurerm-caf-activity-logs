@@ -13,10 +13,13 @@ module "activity_logs" {
     version = "0.x.y"
     
     resource_group_name   = var.rg
-    location              = var.locations
-    tags                  = var.tags
-    prefix                = var.prefix
-    logs_retention       = var.retention
+    log_analytics_workspace_id = var.workspace_id
+    diagnostic_name            = var.diagnostic_name
+    name                       = var.eventhub_name
+    location                   = var.locations
+    tags                       = var.tags
+    prefix                     = var.prefix
+    logs_retention             = var.retention
 }
 ```
 ## Inputs 
@@ -24,6 +27,8 @@ module "activity_logs" {
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
 | resource_group_name | string | None | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. |
+| diagnostic_name | string | None | (Required) Name of the diagnostic activity log |
+| log_analytics_workspace_id | string | None | (Required) The resource ID of the target log analytics worksoace |
 | name | string | None | (Required) Name for the objects created (before naming convention applied.) |
 | location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
 | tags | map | None | (Required) Map of tags for the deployment.  |
