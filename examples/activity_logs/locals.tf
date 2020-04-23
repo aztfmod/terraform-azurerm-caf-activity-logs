@@ -1,6 +1,8 @@
 locals {
     convention = "cafrandom"
     name = "caftest"
+    laname = "caflogtest"
+    diagnostic_name = "cafaudit"
     location = "southeastasia"
     prefix = "test"
     resource_groups = {

@@ -44,6 +44,65 @@ resource "azurerm_eventhub_namespace" "log" {
 
 }
 
+resource "azurerm_monitor_diagnostic_setting" "audit" {
+
+  name                           = var.name
+  target_resource_id             = data.azurerm_subscription.current.id
+  log_analytics_workspace_id     = var.log_analytics_workspace_id
+  eventhub_authorization_rule_id = var.enable_event_hub == true ? "${azurerm_eventhub_namespace.log[0].id}/authorizationrules/RootManageSharedAccessKey" : null
+  eventhub_name                  = azurerm_eventhub_namespace.log[0].name
+  storage_account_id             = azurerm_storage_account.log.id
+
+  log {
+      category = "Administrative"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "Security"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "ServiceHealth"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "Alert"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "Recommendation"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "Policy"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "Autoscale"
+      retention_policy {
+        enabled = false
+      }
+  }
+  log {
+      category = "ResourceHealth"
+      retention_policy {
+        enabled = false
+      }
+  }
+}
+
 resource "azurerm_monitor_log_profile" "subscription" {
   name = "default"
 

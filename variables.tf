@@ -6,6 +6,13 @@ variable "location" {
   description = "(Required) Define the region where the resources will be created."
 }
 
+variable "diagnostic_name" {
+  description = "name of the diagnostic setting"
+}
+variable "log_analytics_workspace_id" {
+  description = "(Required) Id of the Log Analytics workspace"
+}
+
 variable "tags" {
   description = "(Required) Tags for the logs repositories to be created "
   
