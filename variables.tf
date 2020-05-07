@@ -53,3 +53,6 @@ variable "max_length" {
   default = ""
 }
 
+variable "audit_settings_object" {
+  description = "(Required) Contains the settings for Azure Audit activity log retention"
+}
