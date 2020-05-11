@@ -15,11 +15,6 @@ variable "log_analytics_workspace_id" {
 
 variable "tags" {
   description = "(Required) Tags for the logs repositories to be created "
-  
-}
-
-variable "logs_rentention" {
-  description = "(Required) Number of days to keep the logs for long term retention"
 }
 
 variable "enable_event_hub" {

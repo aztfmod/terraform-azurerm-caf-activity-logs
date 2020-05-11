@@ -20,7 +20,6 @@ module "activity_logs" {
     location                   = var.locations
     tags                       = var.tags
     prefix                     = var.prefix
-    logs_retention             = var.retention
 }
 ```
 ## Inputs 
@@ -34,7 +33,6 @@ module "activity_logs" {
 | name | string | None | (Required) Name for the objects created (before naming convention applied.) |
 | location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
 | tags | map | None | (Required) Map of tags for the deployment.  |
-| logs_retention | string | None | (Required) Number of days to keep the logs for long term retention (storage account)  |
 | enable_event_hub | boolean | true | (Optional) Determine to deploy Event Hub for the configuration. |
 | convention | string | None | (Required) Naming convention to be used (check at the naming convention module for possible values).  |
 | prefix | string | None | (Optional) Prefix to be used. |

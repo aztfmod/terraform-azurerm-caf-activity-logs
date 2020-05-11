@@ -31,6 +31,5 @@ module "al_test" {
 
   resource_group_name        = azurerm_resource_group.rg_test.name
     
-  logs_rentention            = local.azure_activity_logs_retention
   enable_event_hub           = local.azure_activity_logs_event_hub
 }
