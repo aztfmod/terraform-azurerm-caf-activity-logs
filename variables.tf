@@ -6,13 +6,15 @@ variable "location" {
   description = "(Required) Define the region where the resources will be created."
 }
 
-variable "tags" {
-  description = "(Required) Tags for the logs repositories to be created "
-  
+variable "diagnostic_name" {
+  description = "name of the diagnostic setting"
+}
+variable "log_analytics_workspace_id" {
+  description = "(Required) Id of the Log Analytics workspace"
 }
 
-variable "logs_rentention" {
-  description = "(Required) Number of days to keep the logs for long term retention"
+variable "tags" {
+  description = "(Required) Tags for the logs repositories to be created "
 }
 
 variable "enable_event_hub" {
@@ -46,3 +48,6 @@ variable "max_length" {
   default = ""
 }
 
+variable "audit_settings_object" {
+  description = "(Required) Contains the settings for Azure Audit activity log retention"
+}
