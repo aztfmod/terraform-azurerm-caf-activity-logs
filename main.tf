@@ -8,10 +8,6 @@ locals {
 data "azurerm_subscription" "current" {
 }
 
-provider "azurerm" {
-  features {}
-}
-
 terraform {
   required_providers {
     azurecaf = {
