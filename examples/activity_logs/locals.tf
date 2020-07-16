@@ -30,5 +30,5 @@ locals {
             ]
     }
 
-    azure_activity_logs_event_hub = true
+    azure_activity_logs_event_hub = false
 }

@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg_test" {
 
 module "la_test" {
   source  = "aztfmod/caf-log-analytics/azurerm"
-  version = "2.0.1"
+  version = "2.2.0"
   
   location                  = local.location
   name                      = local.laname
