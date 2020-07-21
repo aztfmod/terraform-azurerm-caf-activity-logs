@@ -44,7 +44,7 @@ resource "azurerm_eventhub_namespace" "log" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "audit" {
-  name                           = var.name
+  name                           = var.diagnostic_name
   target_resource_id             = data.azurerm_subscription.current.id
   log_analytics_workspace_id     = var.log_analytics_workspace_id
   eventhub_authorization_rule_id = var.enable_event_hub ? "${azurerm_eventhub_namespace.log[0].id}/authorizationrules/RootManageSharedAccessKey" : null
