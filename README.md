@@ -1,3 +1,4 @@
+[![VScodespaces](https://img.shields.io/endpoint?url=https%3A%2F%2Faka.ms%2Fvso-badge)](https://online.visualstudio.com/environments/new?name=terraform-azurerm-caf-activity-logs&repo=aztfmod/terraform-azurerm-caf-activity-logs)
 [![Gitter](https://badges.gitter.im/aztfmod/community.svg)](https://gitter.im/aztfmod/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # Configures the Azure Activity Logs for a subscription
@@ -5,7 +6,7 @@
 Configures the Azure Activity Logs rention for a subscription into:
 1. Event Hub for short term and fast access (optional).
 2. Storage account for long term retention. 
-    3. Log Analytics
+3. Log Analytics
 
 Reference the module to a specific version (recommended):
 ```hcl
@@ -13,35 +14,54 @@ module "activity_logs" {
     source  = "aztfmod/caf-activity-logs/azurerm"
     version = "0.x.y"
     
-    resource_group_name        = var.rg
-    log_analytics_workspace_id = var.workspace_id
-    diagnostic_name            = var.diagnostic_name
-    name                       = var.eventhub_name
-    location                   = var.locations
-    tags                       = var.tags
-    prefix                     = var.prefix
+  convention                 = local.convention
+  location                   = local.location
+  name                       = local.name
+  diagnostic_name            = local.diagnostic_name
+  log_analytics_workspace_id = module.la_test.id
+  prefix                     = local.prefix
+  tags                       = local.tags
+  audit_settings_object      = local.audit
+
+  resource_group_name        = azurerm_resource_group.rg_test.name
+    
+  enable_event_hub           = local.azure_activity_logs_event_hub
 }
 ```
-## Inputs 
 
-| Name | Type | Default | Description |
-| -- | -- | -- | -- |
-| audit_settings_object | string | None | (Required) Contains the settings for Azure Audit activity log retention |
-| resource_group_name | string | None | (Required) Name of the resource group where to create the resource. Changing this forces a new resource to be created. |
-| diagnostic_name | string | None | (Required) Name of the diagnostic activity log |
-| log_analytics_workspace_id | string | None | (Required) The resource ID of the target log analytics worksoace |
-| name | string | None | (Required) Name for the objects created (before naming convention applied.) |
-| location | string | None | (Required) Specifies the Azure location to deploy the resource. Changing this forces a new resource to be created.  |
-| tags | map | None | (Required) Map of tags for the deployment.  |
-| enable_event_hub | boolean | true | (Optional) Determine to deploy Event Hub for the configuration. |
-| convention | string | None | (Required) Naming convention to be used (check at the naming convention module for possible values).  |
-| prefix | string | None | (Optional) Prefix to be used. |
-| postfix | string | None | (Optional) Postfix to be used. |
-| max_length | string | None | (Optional) maximum length to the name of the resource. |
+<!--- BEGIN_TF_DOCS --->
+## Requirements
 
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| azurecaf | n/a |
+| azurerm | n/a |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| audit\_settings\_object | (Required) Contains the settings for Azure Audit activity log retention | `any` | n/a | yes |
+| convention | (Required) Naming convention method to use | `any` | n/a | yes |
+| diagnostic\_name | name of the diagnostic setting | `any` | n/a | yes |
+| enable\_event\_hub | (Optional) Determine to deploy Event Hub for the configuration | `bool` | `true` | no |
+| location | (Required) Define the region where the resources will be created. | `any` | n/a | yes |
+| log\_analytics\_workspace\_id | (Required) Id of the Log Analytics workspace | `any` | n/a | yes |
+| max\_length | (Optional) You can speficy a maximum length to the name of the resource | `string` | `""` | no |
+| name | (Required) Name for the objects created (before naming convention applied.) | `any` | n/a | yes |
+| postfix | (Optional) You can use a postfix to the name of the resource | `string` | `""` | no |
+| prefix | (Optional) You can use a prefix to the name of the resource | `string` | `""` | no |
+| resource\_group\_name | (Required) Name of the resource group to deploy the activity logs. | `any` | n/a | yes |
+| tags | (Required) Tags for the logs repositories to be created | `any` | n/a | yes |
 
 ## Outputs
 
-| Name | Type | Description | 
-| -- | -- | -- | 
-| seclogs_map | map | Returns a map that contains the activity log object: <br> - activity_sa (mandatory) <br> - activity_eh_name (optional, only if enable_event_hub is set to true) <br> - activity_eh_id (optional, only if enable_event_hub is set to true) |
+| Name | Description |
+|------|-------------|
+| seclogs\_map | Ouputs a map with storage account id (activity\_sa), eventhub name (activity\_eh\_name) and id (activity\_eh\_id) - if enabled |
+
+<!--- END_TF_DOCS --->

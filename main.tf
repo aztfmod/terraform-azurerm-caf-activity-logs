@@ -8,7 +8,13 @@ locals {
 data "azurerm_subscription" "current" {
 }
 
-provider "azurerm" {
-  version = ">=2.8.0"
-  features {}
+terraform {
+  required_providers {
+    azurecaf = {
+      source = "aztfmod/azurecaf"
+    }
+    azurerm = {
+      source = "hashicorp/azurerm"
+    }
+  }
 }
